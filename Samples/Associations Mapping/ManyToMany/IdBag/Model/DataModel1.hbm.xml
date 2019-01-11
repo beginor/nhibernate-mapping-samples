@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="IdBag" namespace="IdBag" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Factory" table="Factories">
+    <id name="FactoryID" type="Int32">
+      <column name="FactoryID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="FactoryName" type="String">
+      <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" />
+    </property>
+  </class>
+  <class name="Company" table="Companies">
+    <id name="CompanyID" type="Int32">
+      <column name="CompanyID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String">
+      <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" />
+    </property>
+    <idbag name="Factories" table="CompanyFactories" generic="true">
+      <collection-id column="CompanyFactoryID" type="Int32">
+        <column name="CompanyFactoryID" not-null="false" />
+        <generator class="identity" />
+      </collection-id>
+      <key>
+        <column name="CompanyID" not-null="true" sql-type="INTEGER" />
+      </key>
+      <many-to-many class="Factory" fetch="join">
+        <column name="FactoryID" not-null="true" sql-type="INTEGER" />
+      </many-to-many>
+    </idbag>
+  </class>
+</hibernate-mapping>

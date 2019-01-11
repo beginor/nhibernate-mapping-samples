@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ComponentID" namespace="ComponentID" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$ComplexTypes">
+    <component class="KeyType" p1:Guid="df9b9fc4-df3c-4508-acba-4838289b9028">
+      <parent name="Parent" p1:generate="false" p1:setter-modifier="private" />
+      <property name="FirstName" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="True" p1:Guid="793650ed-b242-435b-b00e-815fe06d89e5">
+        <column name="FirstName" not-null="true" length="50" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="LastName" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="True" p1:Guid="bbbdf6f1-39cf-45b7-8786-0f67bd4f3c53">
+        <column name="LastName" not-null="true" length="50" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+    </component>
+  </class>
+  <class name="Person" table="Person" p1:Guid="3b778a98-fbe0-4af1-98f8-bc356bdbf4c0">
+    <composite-id name="Key" class="KeyType" p1:ValidateRequired="False" p1:Guid="698c5e62-0673-44d2-8e1c-205f28035fb5">
+      <key-property name="FirstName">
+        <column name="FirstName" />
+      </key-property>
+      <key-property name="LastName">
+        <column name="LastName" />
+      </key-property>
+    </composite-id>
+    <property name="BirthDay" type="DateTime" p1:ValidateRequired="True" p1:Guid="e9bccf2f-ca6e-48c6-a83f-c99bbcdfac4c">
+      <column name="BirthDay" not-null="true" sql-type="DATE" p1:unicode="false" />
+    </property>
+    <property name="Address" type="String" p1:ValidateMaxLength="200" p1:ValidateRequired="True" p1:Guid="419f5a37-5601-4ec4-9cc6-91a2c35a5ed7">
+      <column name="Address" not-null="true" length="200" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <one-to-one name="Contact" class="Contact" constrained="true" p1:AssociationGuid="f35e5f1e-907a-4677-abe5-743719881078" p1:Guid="1ac11f97-f224-4acc-b884-487cef5ba6ac" />
+  </class>
+  <class name="Contact" table="Contact" p1:Guid="10760cd0-c82b-4262-be90-ecbd658f8ffd">
+    <composite-id name="Key" class="KeyType" p1:ValidateRequired="False" p1:Guid="2ba2545b-4e39-48df-b84d-55cd19102df1">
+      <key-property name="FirstName" />
+      <key-property name="LastName" />
+    </composite-id>
+    <property name="Phone" type="String" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="5d23a23f-dd0b-4bf2-a235-13620190905a">
+      <column name="Phone" not-null="false" sql-type="СHAR" p1:unicode="false" />
+    </property>
+    <one-to-one name="Person" class="Person" p1:AssociationGuid="f35e5f1e-907a-4677-abe5-743719881078" p1:Guid="f45096ab-4fe5-468a-8f7d-ac4d938ba1b3" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="TPT" namespace="TPT" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Animal" table="Animal" p1:Guid="ce3baeef-b3e2-46e6-aee3-40bacb04a0be">
+    <id name="ID" type="Int32" p1:ValidateRequired="True" p1:Guid="cbecf2f3-94e6-4e9b-a182-e8582fe7aa07">
+      <column name="ID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="FoodClassification" type="String" p1:ValidateMaxLength="128" p1:ValidateRequired="True" p1:Guid="2c38150a-6423-416d-afec-0ee63dd19dc0">
+      <column name="FoodClassification" not-null="true" length="128" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <joined-subclass name="Crocodile" table="Crocodile" p1:InheritanceGuid="22d91796-703c-4357-b084-8f537e469758" p1:Guid="a4842d60-7fd1-4e35-8e27-ed5133ceb444">
+      <key>
+        <column name="ID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <property name="Length" type="Decimal" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="ea86b9e4-0250-423c-a32d-77995f6a9771">
+        <column name="Length" not-null="false" sql-type="NUMERIC" p1:unicode="false" />
+      </property>
+    </joined-subclass>
+    <joined-subclass name="Dog" table="Dog" p1:InheritanceGuid="22b6b34d-122e-44bf-809b-cb699cf9593e" p1:Guid="fe773b64-b74a-4b59-9282-6a5562af8684">
+      <key>
+        <column name="ID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <property name="Breed" type="String" p1:ValidateMaxLength="128" p1:ValidateRequired="True" p1:Guid="15ae7081-d2c6-494e-bce3-c19f3f12e4d5">
+        <column name="Breed" not-null="true" length="128" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+    </joined-subclass>
+    <joined-subclass name="Horse" table="Horse" p1:InheritanceGuid="52f59c02-0aee-4632-a005-6ecc3d569f24" p1:Guid="24177632-8891-44a2-b6c4-c48de8ed6429">
+      <key>
+        <column name="ID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <property name="Breed" type="String" p1:ValidateMaxLength="128" p1:ValidateRequired="True" p1:Guid="e12c6950-c52a-4e7d-bf74-24b763f60c9c">
+        <column name="Breed" not-null="true" length="128" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="MaximumSpeed" type="Decimal" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="e8fa882d-f447-427b-954d-ee3dbf6932d7">
+        <column name="MaximumSpeed" not-null="false" sql-type="NUMERIC" p1:unicode="false" />
+      </property>
+    </joined-subclass>
+    <joined-subclass name="Snake" table="Snake" p1:InheritanceGuid="b1159181-8088-4a69-ba96-8c5db772a9fc" p1:Guid="9c1b5970-4fd1-4b53-8809-8baa2b9da9e5">
+      <key>
+        <column name="ID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <property name="IsVenomous" type="Boolean" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="6424e843-3379-4764-b53b-e471625cb30d">
+        <column name="IsVenomous" not-null="false" sql-type="BOOLEAN" p1:unicode="false" />
+      </property>
+      <property name="Length" type="Decimal" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="dd3e952f-f4df-4dff-952a-e87d30aad9c1">
+        <column name="Length" not-null="false" sql-type="NUMERIC" p1:unicode="false" />
+      </property>
+    </joined-subclass>
+  </class>
+</hibernate-mapping>

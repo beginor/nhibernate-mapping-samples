@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ComponentID" namespace="ComponentID" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Person" table="Person">
+    <composite-id name="Key" class="KeyType">
+      <key-property name="FirstName" type="String">
+        <column name="FirstName" not-null="true" length="50" sql-type="VARCHAR" />
+      </key-property>
+      <key-property name="LastName" type="String">
+        <column name="LastName" not-null="true" length="50" sql-type="VARCHAR" />
+      </key-property>
+    </composite-id>
+    <property name="BirthDay" type="DateTime">
+      <column name="BirthDay" not-null="true" sql-type="DATE" />
+    </property>
+    <property name="Address" type="String">
+      <column name="Address" not-null="true" length="200" sql-type="VARCHAR" />
+    </property>
+    <one-to-one name="Contact" class="Contact" constrained="true" />
+  </class>
+  <class name="Contact" table="Contact">
+    <composite-id name="Key" class="KeyType">
+      <key-property name="FirstName" type="String">
+        <column name="FirstName" not-null="true" length="50" sql-type="VARCHAR" />
+      </key-property>
+      <key-property name="LastName" type="String">
+        <column name="LastName" not-null="true" length="50" sql-type="VARCHAR" />
+      </key-property>
+    </composite-id>
+    <property name="Phone" type="String">
+      <column name="Phone" not-null="false" sql-type="СHAR" />
+    </property>
+    <one-to-one name="Person" class="Person" />
+  </class>
+</hibernate-mapping>

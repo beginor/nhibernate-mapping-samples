@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="EntityResult" namespace="EntityResult" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Department" table="Department">
+    <id name="Id" type="Int32">
+      <column name="Id" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String">
+      <column name="Name" not-null="false" length="14" sql-type="VARCHAR" />
+    </property>
+    <property name="Location" type="String">
+      <column name="Location" not-null="false" length="13" sql-type="VARCHAR" />
+    </property>
+  </class>
+  <sql-query name="GetDepartments">
+    <return class="Department">
+      <return-property name="Id" column="Id" />
+      <return-property name="Name" column="Name" />
+      <return-property name="Location" column="Location" />
+    </return>select * from Department</sql-query>
+  <sql-query name="GetDepartmentsByLocation">
+    <return class="Department">
+      <return-property name="Id" column="Id" />
+      <return-property name="Name" column="Name" />
+      <return-property name="Location" column="Location" />
+    </return>
+    <query-param name="loc" type="String" />SELECT * FROM Department WHERE Location = :loc</sql-query>
+</hibernate-mapping>

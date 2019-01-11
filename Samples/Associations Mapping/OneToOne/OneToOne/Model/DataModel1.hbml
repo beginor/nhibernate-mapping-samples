@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="OneToOne" namespace="OneToOne" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Person" table="Person" p1:Guid="0cb4669e-34b5-4503-8800-08f018fde371">
+    <id name="PersonID" type="Int32" p1:ValidateRequired="True" p1:Guid="1cdeb454-2e6c-45a6-91d2-ee082f7a2072">
+      <column name="PersonID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+    </id>
+    <property name="BirthDay" type="DateTime" p1:ValidateRequired="True" p1:Guid="e99268fc-03ba-411b-87b5-b61e04c0d9ec">
+      <column name="BirthDay" not-null="true" sql-type="DATE" p1:unicode="false" />
+    </property>
+    <property name="Address" type="String" p1:ValidateMaxLength="200" p1:ValidateRequired="True" p1:Guid="c969c8ad-5b28-4a91-be35-6665dcdfbf8e">
+      <column name="Address" not-null="true" length="200" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <one-to-one name="Contact" class="Contact" constrained="true" p1:AssociationGuid="4114f4a0-09e2-43fa-996b-30753ae11de9" p1:Guid="c81afedf-858b-4ab1-8978-74d154d77e63" />
+  </class>
+  <class name="Contact" table="Contact" p1:Guid="7456bf44-73c7-41f6-9d29-9af151c68f48">
+    <id name="ContactID" type="Int32" p1:ValidateRequired="True" p1:Guid="bb2a68ff-852e-4c5e-9f0f-228f28231af4">
+      <column name="ContactID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:ValidateMaxLength="100" p1:ValidateRequired="True" p1:Guid="542bff03-ee38-4b2a-b476-c034d7dfcab1">
+      <column name="Name" not-null="true" length="100" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="Phone" type="String" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="a20e552a-2cca-4507-817e-c1d90697eb84">
+      <column name="Phone" not-null="false" sql-type="СHAR" p1:unicode="false" />
+    </property>
+    <one-to-one name="Person" class="Person" p1:AssociationGuid="4114f4a0-09e2-43fa-996b-30753ae11de9" p1:Guid="48af1d17-7f9f-459a-8ad1-0232bd51c359" />
+  </class>
+</hibernate-mapping>

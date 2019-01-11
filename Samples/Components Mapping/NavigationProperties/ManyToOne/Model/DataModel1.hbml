@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ManyToOne" namespace="ManyToOne" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$ComplexTypes">
+    <component class="AddressType" p1:Guid="da5f1eb6-58fa-4370-aa48-0b748bac06dd">
+      <parent name="Parent" p1:generate="false" p1:setter-modifier="private" />
+      <property name="Address" type="String" p1:nullable="true" p1:ValidateMaxLength="60" p1:ValidateRequired="False" p1:Guid="5a42fe36-0b2f-4249-a447-a58d8e69c87b">
+        <column name="Address" not-null="false" length="60" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="City" type="String" p1:nullable="true" p1:ValidateMaxLength="15" p1:ValidateRequired="False" p1:Guid="b0b11909-e5f2-49fb-9a11-79bf7d05e973">
+        <column name="City" not-null="false" length="15" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <many-to-one name="Country" class="Country" p1:AssociationGuid="76309922-98ba-4994-aa5e-146d5735ba30" p1:Guid="0a30802c-0a5c-4e55-a7a1-d2924207d8c3">
+        <column name="CountryID" not-null="false" sql-type="INTEGER" p1:unicode="false" />
+      </many-to-one>
+    </component>
+  </class>
+  <class name="Supplier" table="Suppliers" p1:Guid="47bcc0c1-5aee-4013-9661-0234d1c50d6e">
+    <id name="SupplierID" type="Int32" p1:ValidateRequired="True" p1:Guid="36b1a817-4ac0-4b4a-998c-47cd7b6eb5d6">
+      <column name="SupplierID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String" p1:ValidateMaxLength="40" p1:ValidateRequired="True" p1:Guid="135fe931-ef3a-45fd-ae56-5151ae5e7cb4">
+      <column name="CompanyName" not-null="true" length="40" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <component name="Address" class="AddressType" p1:ValidateRequired="False" p1:Guid="279f33f2-2149-4faf-9209-1f3dec2e15ee">
+      <property name="Address">
+        <column name="Address" />
+      </property>
+      <property name="City">
+        <column name="City" />
+      </property>
+      <many-to-one name="Country" class="Country" p1:AssociationGuid="76309922-98ba-4994-aa5e-146d5735ba30" p1:Guid="0a30802c-0a5c-4e55-a7a1-d2924207d8c3">
+        <column name="CountryID" not-null="false" sql-type="INTEGER" p1:unicode="false" />
+      </many-to-one>
+    </component>
+  </class>
+  <class name="Order" table="Orders" p1:Guid="7f106c9b-2e83-4d9f-aacf-10e626789a84">
+    <id name="OrderID" type="Int32" p1:ValidateRequired="True" p1:Guid="99906319-9f21-4722-82bd-e8f78263c2cc">
+      <column name="OrderID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Customer" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="True" p1:Guid="2bad689e-3bdf-420a-aa41-c4772e0452c6">
+      <column name="Customer" not-null="true" length="50" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <component name="ShipAddress" class="AddressType" p1:ValidateRequired="False" p1:Guid="5cbc94e0-b441-46f1-9c82-98c099588077">
+      <property name="Address">
+        <column name="ShipAddress" />
+      </property>
+      <property name="City">
+        <column name="ShipCity" />
+      </property>
+      <many-to-one name="Country" class="Country" p1:AssociationGuid="76309922-98ba-4994-aa5e-146d5735ba30" p1:Guid="0a30802c-0a5c-4e55-a7a1-d2924207d8c3">
+        <column name="ShipCountryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </many-to-one>
+    </component>
+  </class>
+  <class name="Country" table="Countries" p1:Guid="60fdd969-74e4-41b0-99da-b8529089986a">
+    <id name="CountryID" type="Int32" p1:ValidateRequired="True" p1:Guid="8898252f-84f4-42c5-9e6d-0583c9afa842">
+      <column name="CountryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="CountryName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="b8aa9753-1864-4554-8a95-3299590ba77e">
+      <column name="CountryName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+  </class>
+</hibernate-mapping>

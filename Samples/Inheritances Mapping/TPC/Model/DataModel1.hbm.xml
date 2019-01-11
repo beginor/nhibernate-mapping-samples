@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="TPC" namespace="TPC" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Animal" abstract="true">
+    <id name="ID" type="Int32">
+      <column name="ID" not-null="true" sql-type="INTEGER" />
+      <generator class="assigned" />
+    </id>
+    <property name="FoodClassification" type="String">
+      <column name="FoodClassification" not-null="true" length="128" sql-type="VARCHAR" />
+    </property>
+    <union-subclass name="Dog" table="Dog">
+      <property name="Breed" type="String">
+        <column name="Breed" not-null="true" length="128" sql-type="VARCHAR" />
+      </property>
+    </union-subclass>
+    <union-subclass name="Snake" table="Snake">
+      <property name="Length" type="Decimal">
+        <column name="Length" not-null="false" sql-type="NUMERIC" />
+      </property>
+      <property name="IsVenomous" type="Boolean">
+        <column name="IsVenomous" not-null="false" sql-type="BOOLEAN" />
+      </property>
+    </union-subclass>
+  </class>
+</hibernate-mapping>

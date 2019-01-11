@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="UniqueKey" namespace="UniqueKey" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Employee" table="Employee" p1:Guid="091f74a3-9d4c-42c3-9bcb-cec44564611c">
+    <id name="EmployeeId" type="Int32" p1:ValidateRequired="True" p1:Guid="b3fbb6a7-0419-48eb-8979-05df226d234a">
+      <column name="EmployeeId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="10" p1:ValidateRequired="False" p1:Guid="d95fd5a3-6388-41c3-8018-d103191fb657">
+      <column name="Name" not-null="false" length="10" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <many-to-one name="Department" class="Department" property-ref="Phone" p1:AssociationGuid="a4d9c0c6-f1aa-477e-90c7-467553fd44ff" p1:Guid="29770c81-5a49-4b61-92ff-628c205fcc07">
+      <column name="DepartmentPhone" not-null="false" length="20" sql-type="VARCHAR" p1:unicode="false" />
+    </many-to-one>
+  </class>
+  <class name="Department" table="Department" p1:Guid="7a5d1f24-1ae8-4b94-9ef2-8b2b86a58439">
+    <id name="DepartmentId" type="Int32" p1:ValidateRequired="True" p1:Guid="8f8c7d7d-b346-4ef9-845e-0f89817d278c">
+      <column name="DepartmentId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="56b137ca-4333-4a28-94b9-5802d9a73671">
+      <column name="Name" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="Phone" type="String" p1:nullable="true" p1:ValidateMaxLength="20" p1:ValidateRequired="False" p1:Guid="a58b66da-9cf9-4ebf-8863-bd98d54d5df7">
+      <column name="Phone" not-null="false" length="20" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Employees" inverse="true" generic="true" p1:AssociationGuid="a4d9c0c6-f1aa-477e-90c7-467553fd44ff" p1:Guid="694f652a-4480-4f45-879c-84cfcb2bec12">
+      <key property-ref="Phone">
+        <column name="DepartmentPhone" />
+      </key>
+      <one-to-many class="Employee" />
+    </set>
+  </class>
+</hibernate-mapping>

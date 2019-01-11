@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ComponentUniqueKey" namespace="ComponentUniqueKey" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Employee" table="Employee">
+    <id name="EmployeeId" type="Int32">
+      <column name="EmployeeId" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String">
+      <column name="Name" not-null="false" length="10" sql-type="VARCHAR" />
+    </property>
+    <many-to-one name="Department" class="Department" property-ref="UniqueKey">
+      <column name="DepartmentName" not-null="false" length="14" sql-type="VARCHAR" />
+      <column name="DepartmentPhone" not-null="false" length="20" sql-type="VARCHAR" />
+    </many-to-one>
+  </class>
+  <class name="Department" table="Department">
+    <id name="DepartmentId" type="Int32">
+      <column name="DepartmentId" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <component name="UniqueKey" class="DeptKeyType">
+      <property name="Name" type="String">
+        <column name="Name" not-null="false" length="14" sql-type="VARCHAR" />
+      </property>
+      <property name="Phone" type="String">
+        <column name="Phone" not-null="false" length="20" sql-type="VARCHAR" />
+      </property>
+    </component>
+    <set name="Employees" inverse="true" generic="true">
+      <key property-ref="UniqueKey">
+        <column name="DepartmentName" />
+        <column name="DepartmentPhone" />
+      </key>
+      <one-to-many class="Employee" />
+    </set>
+  </class>
+</hibernate-mapping>

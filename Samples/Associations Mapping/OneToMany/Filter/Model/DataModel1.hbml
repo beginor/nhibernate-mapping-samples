@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Filter" namespace="Filter" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Employee" table="Employee" p1:Guid="b18f845a-00e5-444d-b426-e535c367aa8d">
+    <id name="EmployeeId" type="Int32" p1:ValidateRequired="True" p1:Guid="3084b117-4f32-4d2b-bd50-88939fa53516">
+      <column name="EmployeeId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="10" p1:ValidateRequired="False" p1:Guid="b5e18541-777a-40e0-99f0-572c993afdb1">
+      <column name="Name" not-null="false" length="10" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <many-to-one name="Department" class="Department" p1:AssociationGuid="c4a10085-6caa-48ba-a4e2-b24a122be4a5" p1:Guid="16f7b493-6f15-4441-a00e-a8ea496557e4">
+      <column name="DepartmentId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+    </many-to-one>
+  </class>
+  <class name="Department" table="Department" p1:Guid="7170be20-a314-4dea-b49b-053d32bd51c4">
+    <id name="DepartmentId" type="Int32" p1:ValidateRequired="True" p1:Guid="ca4eec74-fa37-4c26-b6d8-30c323a5c410">
+      <column name="DepartmentId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="e4cc7e3f-48f3-4fc8-a714-044dc7794774">
+      <column name="Name" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Employees" inverse="true" generic="true" p1:AssociationGuid="c4a10085-6caa-48ba-a4e2-b24a122be4a5" p1:Guid="7ecb1804-a8db-4eee-886e-9ab4e8c49ae9">
+      <key>
+        <column name="DepartmentId" />
+      </key>
+      <one-to-many class="Employee" />
+      <filter name="MyFilter" condition="EmployeeId &gt; :param" />
+    </set>
+  </class>
+  <filter-def name="MyFilter">
+    <filter-param name="param" type="Int32" />
+  </filter-def>
+</hibernate-mapping>

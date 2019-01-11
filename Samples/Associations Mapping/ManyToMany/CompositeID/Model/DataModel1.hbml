@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="CompositeID" namespace="CompositeID" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Factory" table="Factories" p1:Guid="d8f852f8-2046-4afc-9281-a657ec521ebf">
+    <composite-id>
+      <key-property name="FactoryID" type="Int32" p1:ValidateRequired="True" p1:Guid="a84d56e3-d3a5-41e0-bc17-15560c3fae42">
+        <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key-property>
+      <key-property name="FactoryCode" type="Int32" p1:ValidateRequired="True" p1:Guid="92a8b26d-0130-4274-8f64-5873933be10d">
+        <column name="FactoryCode" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key-property>
+    </composite-id>
+    <property name="FactoryName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="77b270ce-a9a1-4036-aaf3-a08654dfc921">
+      <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Companies" table="CompanyFactories" inverse="true" generic="true" p1:AssociationGuid="1438e3fe-f1ca-4d2a-a1da-f21807fe5852" p1:Guid="228f7ad1-06d7-48a5-ad16-975de0e811ec">
+      <key>
+        <column name="FactoryID" />
+        <column name="FactoryCode" />
+      </key>
+      <many-to-many class="Company" fetch="join">
+        <column name="CompanyID" />
+        <column name="CompanyCode" />
+      </many-to-many>
+    </set>
+  </class>
+  <class name="Company" table="Companies" p1:Guid="4a97ab37-6f28-4c9b-9e26-31f35d0154cb">
+    <composite-id>
+      <key-property name="CompanyID" type="Int32" p1:ValidateRequired="True" p1:Guid="c121d36d-9c48-4157-bc6c-8dbc9d16fc9b">
+        <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key-property>
+      <key-property name="CompanyCode" type="Int32" p1:ValidateRequired="True" p1:Guid="b9c02bb0-2534-4a41-ae12-3225fd7ab745">
+        <column name="CompanyCode" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key-property>
+    </composite-id>
+    <property name="CompanyName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="058a0a5e-da16-4334-bb02-53fcfd372a77">
+      <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Factories" table="CompanyFactories" generic="true" p1:AssociationGuid="1438e3fe-f1ca-4d2a-a1da-f21807fe5852" p1:Guid="9075b967-6ba4-4029-b6aa-bea5b3f13d15">
+      <key>
+        <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+        <column name="CompanyCode" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <many-to-many class="Factory" fetch="join">
+        <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+        <column name="FactoryCode" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

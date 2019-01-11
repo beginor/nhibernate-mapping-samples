@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ZeroOrOneToMany" namespace="ZeroOrOneToMany" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Department" table="Department" p1:Guid="766b8c14-1e95-4a33-ae8f-d36514a65333">
+    <id name="DepartmentId" type="Int32" p1:ValidateRequired="True" p1:Guid="3b19e0cf-01ac-463b-aa6e-0ec3a7bcc49e">
+      <column name="DepartmentId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="e1b189df-d27d-4d3f-a6f9-62d8b5b99757">
+      <column name="Name" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Employees" inverse="true" generic="true" p1:AssociationGuid="68484194-dbc7-4d40-9c28-5235af75ef9a" p1:Guid="d46bcd99-25f8-468f-a47a-084b4e4fd78f">
+      <key>
+        <column name="DepartmentId" />
+      </key>
+      <one-to-many class="Employee" />
+    </set>
+  </class>
+  <class name="Employee" table="Employee" p1:Guid="3fb21ea0-985f-40d0-a156-45306ca64715">
+    <id name="EmployeeId" type="Int32" p1:ValidateRequired="True" p1:Guid="e75635d7-4d94-44d3-8f46-0952d481b167">
+      <column name="EmployeeId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="10" p1:ValidateRequired="False" p1:Guid="4bdb0e7d-807d-44c6-84dd-21a77acec02c">
+      <column name="Name" not-null="false" length="10" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <many-to-one name="Department" class="Department" p1:AssociationGuid="68484194-dbc7-4d40-9c28-5235af75ef9a" p1:Guid="c5b56f8d-96de-48ba-a9c6-8be3018e6dd9">
+      <column name="DepartmentId" not-null="false" sql-type="INTEGER" p1:unicode="false" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

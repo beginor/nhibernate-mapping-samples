@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="EmbededComplexTypes" namespace="EmbededComplexTypes" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Customer" table="Customers">
+    <id name="CustomerID" type="Int32">
+      <column name="CustomerID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String">
+      <column name="CompanyName" not-null="true" length="40" sql-type="VARCHAR" />
+    </property>
+    <property name="ContactName" type="String">
+      <column name="ContactName" not-null="false" length="30" sql-type="VARCHAR" />
+    </property>
+    <property name="ContactTitle" type="String">
+      <column name="ContactTitle" not-null="false" length="30" sql-type="VARCHAR" />
+    </property>
+    <component name="FullAddress" class="FullAddressType">
+      <component name="Address" class="AddressType">
+        <property name="Address" type="String">
+          <column name="Address" not-null="false" length="60" sql-type="VARCHAR" />
+        </property>
+        <property name="City" type="String">
+          <column name="City" not-null="false" length="15" sql-type="VARCHAR" />
+        </property>
+        <property name="Region" type="String">
+          <column name="Region" not-null="false" length="15" sql-type="VARCHAR" />
+        </property>
+        <property name="PostalCode" type="String">
+          <column name="PostalCode" not-null="false" length="10" sql-type="VARCHAR" />
+        </property>
+        <property name="Country" type="String">
+          <column name="Country" not-null="false" length="15" sql-type="VARCHAR" />
+        </property>
+      </component>
+      <property name="Phone" type="String">
+        <column name="Phone" not-null="false" length="24" sql-type="VARCHAR" />
+      </property>
+      <property name="Fax" type="String">
+        <column name="Fax" not-null="false" length="24" sql-type="VARCHAR" />
+      </property>
+    </component>
+  </class>
+  <class name="Order" table="Orders">
+    <id name="OrderID" type="Int32">
+      <column name="OrderID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="CustomerID" type="Int32">
+      <column name="CustomerID" not-null="true" sql-type="INTEGER" />
+    </property>
+    <property name="OrderDate" type="DateTime">
+      <column name="OrderDate" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property name="RequiredDate" type="DateTime">
+      <column name="RequiredDate" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property name="ShippedDate" type="DateTime">
+      <column name="ShippedDate" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property name="ShipVia" type="Int32">
+      <column name="ShipVia" not-null="false" sql-type="INTEGER" />
+    </property>
+    <property name="Freight" type="Int32">
+      <column name="Freight" default="0" not-null="false" sql-type="INTEGER" />
+    </property>
+    <property name="ShipName" type="String">
+      <column name="ShipName" not-null="false" length="40" sql-type="VARCHAR" />
+    </property>
+    <component name="ShipAddress" class="AddressType">
+      <property name="Address" type="String">
+        <column name="ShipAddress" not-null="false" length="60" sql-type="VARCHAR" />
+      </property>
+      <property name="City" type="String">
+        <column name="ShipCity" not-null="false" length="15" sql-type="VARCHAR" />
+      </property>
+      <property name="Region" type="String">
+        <column name="ShipRegion" not-null="false" length="15" sql-type="VARCHAR" />
+      </property>
+      <property name="PostalCode" type="String">
+        <column name="ShipPostalCode" not-null="false" length="10" sql-type="VARCHAR" />
+      </property>
+      <property name="Country" type="String">
+        <column name="ShipCountry" not-null="false" length="15" sql-type="VARCHAR" />
+      </property>
+    </component>
+  </class>
+</hibernate-mapping>

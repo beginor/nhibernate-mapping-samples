@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="CompositeID" namespace="CompositeID" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Employee" table="Employee">
+    <id name="EmployeeId" type="Int32">
+      <column name="EmployeeId" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String">
+      <column name="Name" not-null="false" length="10" sql-type="VARCHAR" />
+    </property>
+    <many-to-one name="DepartmentPhone" class="DepartmentPhone">
+      <column name="DepartmentId" not-null="false" sql-type="INTEGER" />
+      <column name="DepartmentPhoneId" not-null="false" sql-type="INTEGER" />
+    </many-to-one>
+  </class>
+  <class name="DepartmentPhone" table="DepartmentPhone">
+    <composite-id>
+      <key-property name="DepartmentId" type="Int32">
+        <column name="DepartmentId" not-null="true" sql-type="INTEGER" />
+      </key-property>
+      <key-property name="PhoneID" type="Int32">
+        <column name="PhoneID" not-null="true" sql-type="INTEGER" />
+      </key-property>
+    </composite-id>
+    <property name="PhoneNumber" type="String">
+      <column name="PhoneNumber" not-null="false" length="20" sql-type="VARCHAR" />
+    </property>
+    <property name="Name" type="String">
+      <column name="Name" not-null="false" length="14" sql-type="VARCHAR" />
+    </property>
+    <set name="Employees" inverse="true" generic="true">
+      <key>
+        <column name="DepartmentId" />
+        <column name="DepartmentPhoneId" />
+      </key>
+      <one-to-many class="Employee" />
+    </set>
+  </class>
+</hibernate-mapping>

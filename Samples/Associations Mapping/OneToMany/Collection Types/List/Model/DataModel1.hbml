@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="List" namespace="List" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Message" table="Message" p1:Guid="5ce5e594-5fb6-403d-aaaf-7fc29286921b">
+    <id name="Id" type="Int32" p1:ValidateRequired="True" p1:Guid="d9789d59-a9ce-49bb-8e3b-9ededa870829">
+      <column name="Id" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Text" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="970bc1ad-fab4-4ffb-9fa8-13e1b8a05e0b">
+      <column name="Text" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+  </class>
+  <class name="Conversation" table="Conversation" p1:Guid="ced6585c-18e1-4faf-9c00-fdd970011ebf">
+    <id name="Id" type="Int32" p1:ValidateRequired="True" p1:Guid="c5ea0ad9-3176-4c58-aa9e-14e025354966">
+      <column name="Id" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Description" type="String" p1:nullable="true" p1:ValidateMaxLength="40" p1:ValidateRequired="False" p1:Guid="b9f6d1b6-8066-4c61-8174-2132e6ea2746">
+      <column name="Description" not-null="false" length="40" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <list name="Messages" generic="true" p1:AssociationGuid="135e4300-c7d9-4a3c-9b7e-f2dbc7837ba6" p1:Guid="aae09b20-20b5-475d-860b-b5eff0003b63">
+      <key>
+        <column name="ConversationId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <index type="Int32">
+        <column name="`Order`" not-null="false" />
+      </index>
+      <one-to-many class="Message" />
+    </list>
+  </class>
+</hibernate-mapping>

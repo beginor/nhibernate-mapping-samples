@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ComplexTypeResult" namespace="ComplexTypeResult" xmlns="urn:nhibernate-mapping-2.2">
+  <sql-query name="GetDepartments">
+    <return class="DepartmentType">
+      <return-property name="Name" column="Name" />
+      <return-property name="Location" column="Location" />
+    </return>select * from Department</sql-query>
+  <sql-query name="GetDepartmentsByLocation">
+    <return class="DepartmentType">
+      <return-property name="Name" column="Name" />
+      <return-property name="Location" column="Location" />
+    </return>
+    <query-param name="loc" type="String" />SELECT * FROM Department WHERE Location = :loc</sql-query>
+</hibernate-mapping>

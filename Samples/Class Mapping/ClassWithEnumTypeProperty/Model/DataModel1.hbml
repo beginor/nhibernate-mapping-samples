@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ClassWithEnumTypeProperty" namespace="ClassWithEnumTypeProperty" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$EnumTypes">
+    <EnumType Name="EmployeeType" class="EmployeeType" p1:Guid="4e3abc2d-7819-4cd9-988f-bbfae33a6fe1">
+      <Member Name="Manager" Value="1" p1:Guid="1b65ab3a-3d6c-43bd-9825-18748edc1e70" />
+      <Member Name="Clerk" Value="2" p1:Guid="c64aff91-6359-4fb3-ad5c-04a5814b0c78" />
+      <Member Name="Courier" Value="3" p1:Guid="2c191c0f-7018-4941-9a12-aba2f608812e" />
+    </EnumType>
+  </class>
+  <class name="Employee" table="Employee" p1:Guid="44b6b0a3-0ac0-4346-8ce3-d00d38dc1e71">
+    <id name="EmployeeID" type="Int32" p1:ValidateRequired="True" p1:Guid="8e553740-a693-4732-85aa-a43fec19e275">
+      <column name="EmployeeID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="EmployeeType" type="ClassWithEnumTypeProperty.EmployeeType, ClassWithEnumTypeProperty" p1:ValidateRequired="True" p1:Guid="9e8dcd9a-57c7-4a70-aafb-bbc14f04f9b0">
+      <column name="EmployeeType" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+    </property>
+    <property name="FirstName" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="True" p1:Guid="3f34af12-6fd2-48c0-bf12-cc71c97b8fca">
+      <column name="FirstName" not-null="true" length="50" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="LastName" type="String" p1:ValidateMaxLength="50" p1:ValidateRequired="True" p1:Guid="6b264fa0-12ac-4a20-b009-c042612130a6">
+      <column name="LastName" not-null="true" length="50" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+  </class>
+</hibernate-mapping>

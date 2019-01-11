@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="UniqueForeignKey" namespace="UniqueForeignKey" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Contact" table="Contact">
+    <id name="ContactID" type="Int32">
+      <column name="ContactID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String">
+      <column name="Name" not-null="true" length="100" sql-type="VARCHAR" />
+    </property>
+    <property name="Phone" type="String">
+      <column name="Phone" not-null="false" sql-type="СHAR" />
+    </property>
+    <one-to-one name="Person" class="Person" property-ref="Contact" />
+  </class>
+  <class name="Person" table="Person">
+    <id name="PersonID" type="Int32">
+      <column name="PersonID" not-null="true" sql-type="INTEGER" />
+      <generator class="assigned" />
+    </id>
+    <property name="BirthDay" type="DateTime">
+      <column name="BirthDay" not-null="true" sql-type="DATE" />
+    </property>
+    <property name="Address" type="String">
+      <column name="Address" not-null="true" length="200" sql-type="VARCHAR" />
+    </property>
+    <many-to-one name="Contact" class="Contact">
+      <column name="ContactID" not-null="true" sql-type="INTEGER" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

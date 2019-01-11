@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ClassWithFormulaProperty" namespace="ClassWithFormulaProperty" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Department" table="Department">
+    <id name="DEPTNO" type="Int32">
+      <column name="DEPTNO" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="DNAME" type="String">
+      <column name="DNAME" not-null="false" length="14" sql-type="VARCHAR" />
+    </property>
+    <property name="LOC" type="String">
+      <column name="LOC" not-null="false" length="13" sql-type="VARCHAR" />
+    </property>
+    <property name="NameWithLocation" type="String" formula="DNAME || ', ' || LOC" />
+  </class>
+</hibernate-mapping>

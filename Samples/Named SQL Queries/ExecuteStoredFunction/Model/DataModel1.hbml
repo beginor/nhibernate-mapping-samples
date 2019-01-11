@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ExecuteStoredFunction" namespace="ExecuteStoredFunction" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <sql-query name="Sqrt" p1:procedure="Sqrt" callable="true" p1:Guid="15d2ba1d-f9ef-42e7-8ada-a4c1d8927858">
+    <return-scalar column="return_value" type="Int32" />
+    <query-param name="param" p1:source="param" type="Int32" />select Sqrt(:param) as return_value</sql-query>
+</hibernate-mapping>

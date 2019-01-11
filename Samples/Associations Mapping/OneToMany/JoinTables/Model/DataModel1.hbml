@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="JoinTables" namespace="JoinTables" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Order" table="Orders" p1:Guid="468d1d00-3897-490a-b961-1026f2c5cf30">
+    <id name="OrderID" type="Int32" p1:ValidateRequired="True" p1:Guid="a4e104d3-73b0-4b93-bbe8-87ada0b7a16b">
+      <column name="OrderID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Company" type="String" p1:nullable="true" p1:ValidateMaxLength="50" p1:ValidateRequired="False" p1:Guid="9fb37653-df23-42b5-864d-8efdf6d7ab85">
+      <column name="Company" not-null="false" length="50" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <join table="OrderDetails">
+      <key>
+        <column name="OrderID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <property name="Price" type="Double" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="17bc464f-3552-4ca8-a4e6-970980913988">
+        <column name="Price" not-null="false" sql-type="REAL" p1:unicode="false" />
+      </property>
+      <set name="OrderImplementers" inverse="true" generic="true" p1:AssociationGuid="d8fed54a-732b-4464-a7c8-2b1b71411366" p1:Guid="0e6e8fc7-737d-40c0-a4e5-4506411ea092">
+        <key>
+          <column name="OrderID" />
+        </key>
+        <one-to-many class="OrderImplementer" />
+      </set>
+    </join>
+  </class>
+  <class name="OrderImplementer" table="OrderImplementers" p1:Guid="9da279fc-fea1-48dd-a3ff-d54a83dc36a3">
+    <id name="ImplementerID" type="Int32" p1:ValidateRequired="True" p1:Guid="cd17eb47-f6d9-4056-babe-1fec069307c2">
+      <column name="ImplementerID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="50" p1:ValidateRequired="False" p1:Guid="c7d91b5b-0221-4bac-b31b-24caeac8cf6e">
+      <column name="Name" not-null="false" length="50" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <many-to-one name="Order" class="Order" p1:AssociationGuid="d8fed54a-732b-4464-a7c8-2b1b71411366" p1:Guid="54c87a84-e0f0-4b11-96fc-ef4a3a51cc94">
+      <column name="OrderID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

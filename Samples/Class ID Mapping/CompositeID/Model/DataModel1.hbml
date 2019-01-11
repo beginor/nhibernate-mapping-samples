@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="CompositeID" namespace="CompositeID" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="DepartmentPhone" table="DepartmentPhone" p1:Guid="21cff373-3556-4db7-b1de-e84c361b3386">
+    <composite-id>
+      <key-property name="DeptID" type="Int32" p1:ValidateRequired="True" p1:Guid="8101e8e2-8456-4e3f-81a0-2943d958c99a">
+        <column name="DeptID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key-property>
+      <key-property name="PhoneID" type="Int32" p1:ValidateRequired="True" p1:Guid="88c23a5d-7eba-4195-b654-8024204a6211">
+        <column name="PhoneID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key-property>
+    </composite-id>
+    <property name="PhoneNumber" type="String" p1:nullable="true" p1:ValidateMaxLength="20" p1:ValidateRequired="False" p1:Guid="a8620efd-c4cb-49f9-b3f7-75c25bd74c04">
+      <column name="PhoneNumber" not-null="false" length="20" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="DeptName" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="6d38e064-c6e3-4c92-abc8-99106c531e40">
+      <column name="DeptName" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="Location" type="String" p1:nullable="true" p1:ValidateMaxLength="13" p1:ValidateRequired="False" p1:Guid="59d0c90c-f071-450f-8e31-93e2f55a491e">
+      <column name="Location" not-null="false" length="13" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+  </class>
+</hibernate-mapping>

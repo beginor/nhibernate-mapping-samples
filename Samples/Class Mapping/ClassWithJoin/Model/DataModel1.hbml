@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ClassWithJoin" namespace="ClassWithJoin" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Order" table="Orders" p1:Guid="468d1d00-3897-490a-b961-1026f2c5cf30">
+    <id name="OrderID" type="Int32" p1:ValidateRequired="True" p1:Guid="a4e104d3-73b0-4b93-bbe8-87ada0b7a16b">
+      <column name="OrderID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Company" type="String" p1:nullable="true" p1:ValidateMaxLength="50" p1:ValidateRequired="False" p1:Guid="9fb37653-df23-42b5-864d-8efdf6d7ab85">
+      <column name="Company" not-null="false" length="50" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="OrderDate" type="DateTime" p1:ValidateRequired="True" p1:Guid="59227eee-5960-4af1-89a0-1c08b79d5f43">
+      <column name="OrderDate" not-null="true" sql-type="DATETIME" p1:unicode="false" />
+    </property>
+    <property name="Freight" type="Double" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="65ccd89d-ae87-45b3-a966-91a028b1003b">
+      <column name="Freight" not-null="false" sql-type="REAL" p1:unicode="false" />
+    </property>
+    <property name="ShipDate" type="DateTime" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="fc50cf90-48e3-40bd-8edb-7d592ed81ccf">
+      <column name="ShipDate" not-null="false" sql-type="DATETIME" p1:unicode="false" />
+    </property>
+    <property name="Discount" type="Double" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="0f20f939-801c-48f3-ad84-9ac68fcd63f7">
+      <column name="Discount" not-null="false" sql-type="REAL" p1:unicode="false" />
+    </property>
+    <join table="OrderDetails">
+      <key>
+        <column name="OrderID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <property name="Product" type="String" p1:nullable="true" p1:ValidateMaxLength="50" p1:ValidateRequired="False" p1:Guid="bf1bbd90-782b-4d9d-8215-c5852bce28c7">
+        <column name="Product" not-null="false" length="50" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="Price" type="Double" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="17bc464f-3552-4ca8-a4e6-970980913988">
+        <column name="Price" not-null="false" sql-type="REAL" p1:unicode="false" />
+      </property>
+      <property name="Quantity" type="Double" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="f6171c44-3acc-41fd-822f-78eed87d428e">
+        <column name="Quantity" not-null="false" sql-type="REAL" p1:unicode="false" />
+      </property>
+    </join>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ExtraColumnsComponent" namespace="ExtraColumnsComponent" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$ComplexTypes">
+    <component class="CompanyFactoryType" p1:Guid="a0db2fd1-8ff7-474e-a34e-6be2a87ada8d">
+      <parent name="Parent" p1:generate="false" p1:setter-modifier="private" />
+      <property name="Description" type="String" p1:nullable="true" p1:ValidateMaxLength="50" p1:ValidateRequired="False" p1:Guid="b9e3f632-0039-424e-982c-43f26901a54c">
+        <column name="Description" not-null="false" length="50" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+    </component>
+  </class>
+  <class name="Factory" table="Factories" p1:Guid="9ba7b899-7f6c-49ff-a722-794d9c826d83">
+    <id name="FactoryID" type="Int32" p1:ValidateRequired="True" p1:Guid="288d43b1-754d-4bbc-b7bb-21c94b15334c">
+      <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="FactoryName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="93455c2b-f727-46d2-b986-89f548283042">
+      <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Companies" table="CompanyFactories" generic="true" p1:AssociationGuid="5e029d6a-06ca-4cb3-a89c-eb8325bbaeba" p1:Guid="e24ec922-f5c1-4016-b4bb-02919642a3b1">
+      <key>
+        <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <composite-element class="CompanyFactoryType">
+        <many-to-one name="Companies" class="Company" fetch="join">
+          <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+        </many-to-one>
+        <property name="Description" />
+      </composite-element>
+    </set>
+  </class>
+  <class name="Company" table="Companies" p1:Guid="d1bd3432-ea55-42ef-a3b8-678ae98d092a">
+    <id name="CompanyID" type="Int32" p1:ValidateRequired="True" p1:Guid="a39d1725-d94b-43f2-87e2-2733e2dc789f">
+      <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="55954304-9951-44a6-9055-28f3d0464945">
+      <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Factories" table="CompanyFactories" inverse="true" generic="true" p1:AssociationGuid="5e029d6a-06ca-4cb3-a89c-eb8325bbaeba" p1:Guid="7c7a92ba-bf12-48b3-8f9c-ba6c1719d5be">
+      <key>
+        <column name="CompanyID" />
+      </key>
+      <composite-element class="CompanyFactoryType">
+        <many-to-one name="Factories" class="Factory" fetch="join">
+          <column name="FactoryID" />
+        </many-to-one>
+        <property name="Description" />
+      </composite-element>
+    </set>
+  </class>
+</hibernate-mapping>

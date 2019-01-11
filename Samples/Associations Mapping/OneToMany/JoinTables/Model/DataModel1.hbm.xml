@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="JoinTables" namespace="JoinTables" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Order" table="Orders">
+    <id name="OrderID" type="Int32">
+      <column name="OrderID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="Company" type="String">
+      <column name="Company" not-null="false" length="50" sql-type="VARCHAR" />
+    </property>
+    <join table="OrderDetails">
+      <key>
+        <column name="OrderID" not-null="true" sql-type="INTEGER" />
+      </key>
+      <property name="Price" type="Double">
+        <column name="Price" not-null="false" sql-type="REAL" />
+      </property>
+      <set name="OrderImplementers" inverse="true" generic="true">
+        <key>
+          <column name="OrderID" />
+        </key>
+        <one-to-many class="OrderImplementer" />
+      </set>
+    </join>
+  </class>
+  <class name="OrderImplementer" table="OrderImplementers">
+    <id name="ImplementerID" type="Int32">
+      <column name="ImplementerID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String">
+      <column name="Name" not-null="false" length="50" sql-type="VARCHAR" />
+    </property>
+    <many-to-one name="Order" class="Order">
+      <column name="OrderID" not-null="true" sql-type="INTEGER" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

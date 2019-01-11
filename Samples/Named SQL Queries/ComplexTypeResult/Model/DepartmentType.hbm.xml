@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Note: NHibernate runtime does not allow mapping a query result to a type having no xml-mapping.
+      This is either a bug or a minor defect that can be avoided by writing manually the xml-mapping for the complex type and adding it. In this mapping property descriptions and an identifier for the complex type must be defined.
+-->
+<hibernate-mapping assembly="ComplexTypeResult" namespace="ComplexTypeResult" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="DepartmentType">
+    <id name="Name" type="String">
+    </id>
+    <property name="Location" type="String" />
+  </class>
+</hibernate-mapping>

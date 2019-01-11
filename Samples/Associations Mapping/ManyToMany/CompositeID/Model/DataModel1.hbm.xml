@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="CompositeID" namespace="CompositeID" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Factory" table="Factories">
+    <composite-id>
+      <key-property name="FactoryID" type="Int32">
+        <column name="FactoryID" not-null="true" sql-type="INTEGER" />
+      </key-property>
+      <key-property name="FactoryCode" type="Int32">
+        <column name="FactoryCode" not-null="true" sql-type="INTEGER" />
+      </key-property>
+    </composite-id>
+    <property name="FactoryName" type="String">
+      <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" />
+    </property>
+    <set name="Companies" table="CompanyFactories" inverse="true" generic="true">
+      <key>
+        <column name="FactoryID" />
+        <column name="FactoryCode" />
+      </key>
+      <many-to-many class="Company" fetch="join">
+        <column name="CompanyID" />
+        <column name="CompanyCode" />
+      </many-to-many>
+    </set>
+  </class>
+  <class name="Company" table="Companies">
+    <composite-id>
+      <key-property name="CompanyID" type="Int32">
+        <column name="CompanyID" not-null="true" sql-type="INTEGER" />
+      </key-property>
+      <key-property name="CompanyCode" type="Int32">
+        <column name="CompanyCode" not-null="true" sql-type="INTEGER" />
+      </key-property>
+    </composite-id>
+    <property name="CompanyName" type="String">
+      <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" />
+    </property>
+    <set name="Factories" table="CompanyFactories" generic="true">
+      <key>
+        <column name="CompanyID" not-null="true" sql-type="INTEGER" />
+        <column name="CompanyCode" not-null="true" sql-type="INTEGER" />
+      </key>
+      <many-to-many class="Factory" fetch="join">
+        <column name="FactoryID" not-null="true" sql-type="INTEGER" />
+        <column name="FactoryCode" not-null="true" sql-type="INTEGER" />
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

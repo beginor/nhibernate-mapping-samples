@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ClassWithVersionProperty" namespace="ClassWithVersionProperty" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Department" table="Department" p1:Guid="99bc0349-2dba-496e-b5bb-a15501747220">
+    <id name="DEPTNO" type="Int32" p1:ValidateRequired="True" p1:Guid="a5bb3273-683e-4cea-810e-3e572632f6fb">
+      <column name="DEPTNO" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <version name="Version" type="Int32" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="4178f9cc-2e35-44ed-916a-df95b42f9aa7">
+      <column name="Version" default="0" not-null="false" sql-type="INTEGER" p1:unicode="false" />
+    </version>
+    <property name="DNAME" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="642a2172-acf3-4cf5-9fde-2e1c0d5fbea0">
+      <column name="DNAME" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="LOC" type="String" p1:nullable="true" p1:ValidateMaxLength="13" p1:ValidateRequired="False" p1:Guid="3f1bd369-8002-48cc-8fb3-91d730df597a">
+      <column name="LOC" not-null="false" length="13" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+  </class>
+</hibernate-mapping>

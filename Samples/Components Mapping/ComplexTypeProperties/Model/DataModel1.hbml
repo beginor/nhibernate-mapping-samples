@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ComplexTypeProperties" namespace="ComplexTypeProperties" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$ComplexTypes">
+    <component class="AddressType" p1:Guid="90e06222-3476-41a0-9a81-a74ce0fdaa42">
+      <parent name="Parent" p1:generate="false" p1:setter-modifier="private" />
+      <property name="Address" type="String" p1:nullable="true" p1:ValidateMaxLength="60" p1:ValidateRequired="False" p1:Guid="e802e573-4934-4567-a85c-15a171e63344">
+        <column name="Address" not-null="false" length="60" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="City" type="String" p1:nullable="true" p1:ValidateMaxLength="15" p1:ValidateRequired="False" p1:Guid="85c67604-8d7a-40d7-afc9-ea2706b34060">
+        <column name="City" not-null="false" length="15" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="Region" type="String" p1:nullable="true" p1:ValidateMaxLength="15" p1:ValidateRequired="False" p1:Guid="59d4bdda-66ba-4c64-80ac-046cff70649a">
+        <column name="Region" not-null="false" length="15" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="PostalCode" type="String" p1:nullable="true" p1:ValidateMaxLength="10" p1:ValidateRequired="False" p1:Guid="8dc86120-840a-4f21-a780-147684caedc6">
+        <column name="PostalCode" not-null="false" length="10" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="Country" type="String" p1:nullable="true" p1:ValidateMaxLength="15" p1:ValidateRequired="False" p1:Guid="8d5f9eb7-48ea-42eb-a4f1-3b0d5815c4b7">
+        <column name="Country" not-null="false" length="15" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+    </component>
+  </class>
+  <class name="Order" table="Orders" p1:Guid="6ea61a8b-a19f-42f2-ba15-b3c038cbc099">
+    <id name="OrderID" type="Int32" p1:ValidateRequired="True" p1:Guid="53b9a9de-c42e-410e-8feb-42edb4d0695b">
+      <column name="OrderID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="CustomerID" type="Int32" p1:ValidateRequired="True" p1:Guid="bd826902-cc70-4b6f-b3ee-0cf4a850d6bd">
+      <column name="CustomerID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+    </property>
+    <property name="OrderDate" type="DateTime" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="35e26921-1f6a-4114-83a3-9f802efa8eb4">
+      <column name="OrderDate" not-null="false" sql-type="DATETIME" p1:unicode="false" />
+    </property>
+    <property name="RequiredDate" type="DateTime" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="0f1d2818-8174-427b-a7f4-1e1ab44a05e6">
+      <column name="RequiredDate" not-null="false" sql-type="DATETIME" p1:unicode="false" />
+    </property>
+    <property name="ShippedDate" type="DateTime" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="3bdffe61-d988-4561-817e-67c49b803241">
+      <column name="ShippedDate" not-null="false" sql-type="DATETIME" p1:unicode="false" />
+    </property>
+    <property name="ShipVia" type="Int32" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="92c5e087-57fd-4600-90b0-1f881554c103">
+      <column name="ShipVia" not-null="false" sql-type="INTEGER" p1:unicode="false" />
+    </property>
+    <property name="Freight" type="Int32" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="3dd164a9-552a-47cf-865b-14e71097aa78">
+      <column name="Freight" default="0" not-null="false" sql-type="INTEGER" p1:unicode="false" />
+    </property>
+    <property name="ShipName" type="String" p1:nullable="true" p1:ValidateMaxLength="40" p1:ValidateRequired="False" p1:Guid="c4be4f64-3f52-4936-90ce-b88023d60a69">
+      <column name="ShipName" not-null="false" length="40" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <component name="ShipAddress" class="AddressType" p1:ValidateRequired="False" p1:Guid="7333be95-93f2-4cd3-933a-c36a3e4580da">
+      <property name="Address">
+        <column name="ShipAddress" />
+      </property>
+      <property name="City">
+        <column name="ShipCity" />
+      </property>
+      <property name="Region">
+        <column name="ShipRegion" />
+      </property>
+      <property name="PostalCode">
+        <column name="ShipPostalCode" />
+      </property>
+      <property name="Country">
+        <column name="ShipCountry" />
+      </property>
+    </component>
+  </class>
+  <class name="Customer" table="Customers" p1:Guid="b5e69e92-c9e2-48ff-b16b-64bf51e0034d">
+    <id name="CustomerID" type="Int32" p1:ValidateRequired="True" p1:Guid="090636f2-5c81-4819-888c-66f28d1f5148">
+      <column name="CustomerID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String" p1:ValidateMaxLength="40" p1:ValidateRequired="True" p1:Guid="72426d41-fe4e-45ba-b610-f41644bd8c70">
+      <column name="CompanyName" not-null="true" length="40" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="ContactName" type="String" p1:nullable="true" p1:ValidateMaxLength="30" p1:ValidateRequired="False" p1:Guid="fad722fb-1a8d-4a95-8b79-d6ca264a72ba">
+      <column name="ContactName" not-null="false" length="30" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="ContactTitle" type="String" p1:nullable="true" p1:ValidateMaxLength="30" p1:ValidateRequired="False" p1:Guid="cac48d36-2c9e-4c32-a9ab-474f56cf398e">
+      <column name="ContactTitle" not-null="false" length="30" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="Phone" type="String" p1:nullable="true" p1:ValidateMaxLength="24" p1:ValidateRequired="False" p1:Guid="af27620e-252d-4e83-b551-bec447267156">
+      <column name="Phone" not-null="false" length="24" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="Fax" type="String" p1:nullable="true" p1:ValidateMaxLength="24" p1:ValidateRequired="False" p1:Guid="9f54fe44-501d-4d88-aa10-8a169556cf57">
+      <column name="Fax" not-null="false" length="24" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <component name="Address" class="AddressType" p1:ValidateRequired="False" p1:Guid="e2193d38-aca9-4d3f-b2d9-8ebe17d9ab8e">
+      <property name="Address">
+        <column name="Address" />
+      </property>
+      <property name="City">
+        <column name="City" />
+      </property>
+      <property name="Region">
+        <column name="Region" />
+      </property>
+      <property name="PostalCode">
+        <column name="PostalCode" />
+      </property>
+      <property name="Country">
+        <column name="Country" />
+      </property>
+    </component>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ManyToMany" namespace="ManyToMany" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Factory" table="Factories" p1:Guid="ed2dfa8c-8828-4f7b-8849-dd29392214a5">
+    <id name="FactoryID" type="Int32" p1:ValidateRequired="True" p1:Guid="b23b42cc-270c-4177-bafc-6b1f93da7e8a">
+      <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="FactoryName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="acd0cf69-bae0-4f57-bea9-540396ed58f0">
+      <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Companies" table="CompanyFactories" inverse="true" generic="true" p1:AssociationGuid="1e4ac017-3d15-4ad7-894d-71db89568cf0" p1:Guid="6a88202b-d248-4716-bbe4-45e0c75b85bc">
+      <key>
+        <column name="FactoryID" />
+      </key>
+      <many-to-many class="Company" fetch="join">
+        <column name="CompanyID" />
+      </many-to-many>
+    </set>
+  </class>
+  <class name="Company" table="Companies" p1:Guid="ea9b039e-776a-47ef-9662-69c74a7a9078">
+    <id name="CompanyID" type="Int32" p1:ValidateRequired="True" p1:Guid="deb2c55f-ef03-4ff5-a3bd-e5393ca366d9">
+      <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="9310c13f-a039-4a60-89aa-d7d4a3438551">
+      <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Factories" table="CompanyFactories" generic="true" p1:AssociationGuid="1e4ac017-3d15-4ad7-894d-71db89568cf0" p1:Guid="b9701086-5f24-46c8-b849-6592407dcc7a">
+      <key>
+        <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <many-to-many class="Factory" fetch="join">
+        <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

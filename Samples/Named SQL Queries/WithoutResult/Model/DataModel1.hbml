@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="WithoutResult" namespace="WithoutResult" p1:name="databaseModel" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Department" table="Department" p1:Guid="752d0aea-0ae8-4203-88b2-d7d1bfbcc67e">
+    <id name="Id" type="Int32" p1:ValidateRequired="True" p1:Guid="f263fa24-52b1-4891-ad28-3f3040615b2d">
+      <column name="Id" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="7c5c95ae-9920-4169-9a42-ef119c079d64">
+      <column name="Name" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="Location" type="String" p1:nullable="true" p1:ValidateMaxLength="13" p1:ValidateRequired="False" p1:Guid="aa8275ed-a886-44e8-82c6-a1fcc032c7d3">
+      <column name="Location" not-null="false" length="13" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+  </class>
+  <sql-query name="InsertDepartment" p1:Guid="15d2ba1d-f9ef-42e7-8ada-a4c1d8927858">
+    <query-param name="deptno" type="Int32" />
+    <query-param name="dname" type="String" />
+    <query-param name="loc" type="String" />INSERT INTO Department VALUES(:deptno, :dname,:loc)</sql-query>
+</hibernate-mapping>

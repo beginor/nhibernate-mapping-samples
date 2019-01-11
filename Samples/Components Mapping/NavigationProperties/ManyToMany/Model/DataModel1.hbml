@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ManyToMany" namespace="ManyToMany" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$ComplexTypes">
+    <component class="ContractorType" p1:Guid="3f3ab39b-2d71-496a-aee7-b33cd5f9b83a">
+      <parent name="Parent" p1:generate="false" p1:setter-modifier="private" />
+      <property name="Name" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="c2413cba-6540-4792-b69c-c99ebcb0546c">
+        <column name="Name" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="Address" type="String" p1:nullable="true" p1:ValidateMaxLength="60" p1:ValidateRequired="False" p1:Guid="bfac5d88-a9c1-4b79-ad2d-38dfea728e11">
+        <column name="Address" not-null="false" length="60" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <set name="Partners" table="CompanyShops" generic="true" p1:AssociationGuid="a51d3c76-7407-4c7d-9741-cae7ececdcaf" p1:Guid="475931a5-dbb2-4de7-863a-e1085a0398fa">
+        <many-to-many class="Company" fetch="join">
+          <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+        </many-to-many>
+      </set>
+    </component>
+  </class>
+  <class name="Shop" table="Shops" p1:Guid="07d1b990-b5d3-46a0-91a4-c7957e6349bd">
+    <id name="ShopID" type="Int32" p1:ValidateRequired="True" p1:Guid="426c04d5-4c53-4fb1-b595-12a941692b60">
+      <column name="ShopID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <component name="ShopDescription" class="ContractorType" p1:ValidateRequired="False" p1:Guid="5072b463-c03d-4b71-a87e-bd87409261df">
+      <property name="Name">
+        <column name="ShopName" />
+      </property>
+      <property name="Address">
+        <column name="ShopAddress" />
+      </property>
+      <set name="Partners" table="CompanyShops" generic="true" p1:AssociationGuid="a51d3c76-7407-4c7d-9741-cae7ececdcaf" p1:Guid="475931a5-dbb2-4de7-863a-e1085a0398fa">
+        <key>
+          <column name="ShopID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+        </key>
+        <many-to-many class="Company" fetch="join">
+          <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+        </many-to-many>
+      </set>
+    </component>
+  </class>
+  <class name="Factory" table="Factories" p1:Guid="281d3d72-b950-45c8-bf2c-6ce2a78ceccc">
+    <id name="FactoryID" type="Int32" p1:ValidateRequired="True" p1:Guid="7d7760cf-540a-4594-aaec-a08ea1126657">
+      <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <component name="FactoryDescription" class="ContractorType" p1:ValidateRequired="False" p1:Guid="572a6cc7-47b1-40dc-babb-ccba3813daaf">
+      <property name="Name">
+        <column name="FactoryName" />
+      </property>
+      <property name="Address">
+        <column name="FactoryAddress" />
+      </property>
+      <set name="Partners" table="CompanyFactories" generic="true" p1:AssociationGuid="a51d3c76-7407-4c7d-9741-cae7ececdcaf" p1:Guid="475931a5-dbb2-4de7-863a-e1085a0398fa">
+        <key>
+          <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+        </key>
+        <many-to-many class="Company" fetch="join">
+          <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+        </many-to-many>
+      </set>
+    </component>
+    <property name="WorkersCount" type="Int32" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="176d37dc-7c4e-4b43-9d56-f0c57d7a4f36">
+      <column name="WorkersCount" not-null="false" sql-type="INTEGER" p1:unicode="false" />
+    </property>
+  </class>
+  <class name="Company" table="Companies" p1:Guid="14b4a2b7-494e-4273-b35e-f02e7729fb40">
+    <id name="CompanyID" type="Int32" p1:ValidateRequired="True" p1:Guid="89a757c2-e681-443e-bff4-e0adae9cd67e">
+      <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="18ef3f3e-684e-4963-92c9-b24673721325">
+      <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+  </class>
+</hibernate-mapping>

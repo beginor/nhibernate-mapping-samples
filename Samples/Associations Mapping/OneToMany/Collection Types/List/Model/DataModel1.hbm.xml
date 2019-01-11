@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="List" namespace="List" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Message" table="Message">
+    <id name="Id" type="Int32">
+      <column name="Id" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="Text" type="String">
+      <column name="Text" not-null="false" length="14" sql-type="VARCHAR" />
+    </property>
+  </class>
+  <class name="Conversation" table="Conversation">
+    <id name="Id" type="Int32">
+      <column name="Id" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="Description" type="String">
+      <column name="Description" not-null="false" length="40" sql-type="VARCHAR" />
+    </property>
+    <list name="Messages" generic="true">
+      <key>
+        <column name="ConversationId" not-null="true" sql-type="INTEGER" />
+      </key>
+      <index type="Int32">
+        <column name="`Order`" not-null="false" />
+      </index>
+      <one-to-many class="Message" />
+    </list>
+  </class>
+</hibernate-mapping>

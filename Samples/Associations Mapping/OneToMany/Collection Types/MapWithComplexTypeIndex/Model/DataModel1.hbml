@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="MapWithComplexTypeIndex" namespace="MapWithComplexTypeIndex" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$ComplexTypes">
+    <component class="KeyType" p1:Guid="18baac1e-dde6-44be-bf96-a99a015f6333">
+      <parent name="Parent" p1:generate="false" p1:setter-modifier="private" />
+      <property name="LastName" type="String" p1:ValidateMaxLength="20" p1:ValidateRequired="True" p1:Guid="afb1a3be-262e-4558-89b0-343b6783f18b">
+        <column name="LastName" not-null="false" length="20" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="FirstName" type="String" p1:ValidateMaxLength="10" p1:ValidateRequired="True" p1:Guid="b3dd2354-8ad3-4463-a09c-c62d37c8887c">
+        <column name="FirstName" not-null="false" length="10" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+    </component>
+  </class>
+  <class name="Employee" table="Employee" p1:Guid="69eccb40-02b3-4475-993f-2875ebb587a6">
+    <id name="EmployeeId" type="Int32" p1:ValidateRequired="True" p1:Guid="75044a32-e73f-49aa-8cbe-ba5139b9c312">
+      <column name="EmployeeId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="FirstName" type="String" p1:nullable="true" p1:ValidateMaxLength="10" p1:ValidateRequired="False" p1:Guid="ff891a54-1838-4d61-b8f3-47176af0f455">
+      <column name="FirstName" not-null="false" length="10" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="LastName" type="String" p1:nullable="true" p1:ValidateMaxLength="20" p1:ValidateRequired="False" p1:Guid="35019177-a1fe-4efa-84a4-db2a0a83bfe5">
+      <column name="LastName" not-null="false" length="20" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+  </class>
+  <class name="Department" table="Department" p1:Guid="ad944bc3-093a-469f-9669-24cb43cfcf94">
+    <id name="DepartmentId" type="Int32" p1:ValidateRequired="True" p1:Guid="4b26bef7-a4e3-47a1-a3ec-97efdcdcc113">
+      <column name="DepartmentId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="d07eb833-b4a2-4b52-a60e-a2e947cc5ab2">
+      <column name="Name" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <map name="Employees" generic="true" p1:AssociationGuid="5a593a09-a828-4ee0-854b-e096cd8bcdb8" p1:Guid="560947e9-cfe0-43cb-8111-79099a763249">
+      <key>
+        <column name="DepartmentId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </key>
+      <composite-index class="KeyType">
+        <key-property name="LastName" />
+        <key-property name="FirstName" />
+      </composite-index>
+      <one-to-many class="Employee" />
+    </map>
+  </class>
+</hibernate-mapping>

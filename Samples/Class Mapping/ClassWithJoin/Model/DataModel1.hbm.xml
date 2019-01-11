@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ClassWithJoin" namespace="ClassWithJoin" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Order" table="Orders">
+    <id name="OrderID" type="Int32">
+      <column name="OrderID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="Company" type="String">
+      <column name="Company" not-null="false" length="50" sql-type="VARCHAR" />
+    </property>
+    <property name="OrderDate" type="DateTime">
+      <column name="OrderDate" not-null="true" sql-type="DATETIME" />
+    </property>
+    <property name="Freight" type="Double">
+      <column name="Freight" not-null="false" sql-type="REAL" />
+    </property>
+    <property name="ShipDate" type="DateTime">
+      <column name="ShipDate" not-null="false" sql-type="DATETIME" />
+    </property>
+    <property name="Discount" type="Double">
+      <column name="Discount" not-null="false" sql-type="REAL" />
+    </property>
+    <join table="OrderDetails">
+      <key>
+        <column name="OrderID" not-null="true" sql-type="INTEGER" />
+      </key>
+      <property name="Product" type="String">
+        <column name="Product" not-null="false" length="50" sql-type="VARCHAR" />
+      </property>
+      <property name="Price" type="Double">
+        <column name="Price" not-null="false" sql-type="REAL" />
+      </property>
+      <property name="Quantity" type="Double">
+        <column name="Quantity" not-null="false" sql-type="REAL" />
+      </property>
+    </join>
+  </class>
+</hibernate-mapping>

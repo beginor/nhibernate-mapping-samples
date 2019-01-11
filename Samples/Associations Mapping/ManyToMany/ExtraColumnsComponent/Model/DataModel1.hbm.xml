@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ExtraColumnsComponent" namespace="ExtraColumnsComponent" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Factory" table="Factories">
+    <id name="FactoryID" type="Int32">
+      <column name="FactoryID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="FactoryName" type="String">
+      <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" />
+    </property>
+    <set name="Companies" table="CompanyFactories" generic="true">
+      <key>
+        <column name="FactoryID" not-null="true" sql-type="INTEGER" />
+      </key>
+      <composite-element class="CompanyFactoryType">
+        <many-to-one name="Companies" class="Company" fetch="join">
+          <column name="CompanyID" not-null="true" sql-type="INTEGER" />
+        </many-to-one>
+        <property name="Description">
+          <column name="Description" not-null="false" length="50" sql-type="VARCHAR" />
+        </property>
+      </composite-element>
+    </set>
+  </class>
+  <class name="Company" table="Companies">
+    <id name="CompanyID" type="Int32">
+      <column name="CompanyID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String">
+      <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" />
+    </property>
+    <set name="Factories" table="CompanyFactories" inverse="true" generic="true">
+      <key>
+        <column name="CompanyID" />
+      </key>
+      <composite-element class="CompanyFactoryType">
+        <many-to-one name="Factories" class="Factory" fetch="join">
+          <column name="FactoryID" />
+        </many-to-one>
+        <property name="Description">
+          <column name="Description" not-null="false" length="50" sql-type="VARCHAR" />
+        </property>
+      </composite-element>
+    </set>
+  </class>
+</hibernate-mapping>

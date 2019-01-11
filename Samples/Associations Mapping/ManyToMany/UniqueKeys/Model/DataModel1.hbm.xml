@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="UniqueKeys" namespace="UniqueKeys" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Factory" table="Factories">
+    <id name="FactoryID" type="Int32">
+      <column name="FactoryID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="FactoryName" type="String">
+      <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" />
+    </property>
+    <set name="Companies" table="CompanyFactories" inverse="true" generic="true">
+      <key property-ref="FactoryName">
+        <column name="FactoryName" />
+      </key>
+      <many-to-many class="Company" fetch="join" property-ref="CompanyName">
+        <column name="CompanyName" />
+      </many-to-many>
+    </set>
+  </class>
+  <class name="Company" table="Companies">
+    <id name="CompanyID" type="Int32">
+      <column name="CompanyID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String">
+      <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" />
+    </property>
+    <set name="Factories" table="CompanyFactories" generic="true">
+      <key property-ref="CompanyName">
+        <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" />
+      </key>
+      <many-to-many class="Factory" fetch="join" property-ref="FactoryName">
+        <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" />
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

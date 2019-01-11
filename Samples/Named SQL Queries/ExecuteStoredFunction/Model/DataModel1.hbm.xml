@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ExecuteStoredFunction" namespace="ExecuteStoredFunction" xmlns="urn:nhibernate-mapping-2.2">
+  <sql-query name="Sqrt" callable="true">
+    <return-scalar column="return_value" type="Int32" />
+    <query-param name="param" type="Int32" />select Sqrt(:param) as return_value</sql-query>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="UniqueForeignKey" namespace="UniqueForeignKey" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Contact" table="Contact" p1:Guid="fb5020d2-f056-4c62-ae5d-0ea8557fc94b">
+    <id name="ContactID" type="Int32" p1:ValidateRequired="True" p1:Guid="26cd8262-7b32-485e-a6a1-d250d425e79d">
+      <column name="ContactID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:ValidateMaxLength="100" p1:ValidateRequired="True" p1:Guid="0bfce530-3703-488e-8060-e482800e186c">
+      <column name="Name" not-null="true" length="100" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="Phone" type="String" p1:nullable="true" p1:ValidateRequired="False" p1:Guid="67b5f650-1dc1-4eb4-bc75-ab99cd358ec1">
+      <column name="Phone" not-null="false" sql-type="СHAR" p1:unicode="false" />
+    </property>
+    <one-to-one name="Person" class="Person" property-ref="Contact" p1:AssociationGuid="411a1f8c-73c9-426c-adf2-f36d94fb5a1d" p1:Guid="65239254-58c5-4b61-91e1-eea1e875ccd3" />
+  </class>
+  <class name="Person" table="Person" p1:Guid="2b63f54f-e647-49c0-ae71-52022cc9937d">
+    <id name="PersonID" type="Int32" p1:ValidateRequired="True" p1:Guid="28b905c2-c922-4f0c-845e-067f97f7f4d8">
+      <column name="PersonID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+    </id>
+    <property name="BirthDay" type="DateTime" p1:ValidateRequired="True" p1:Guid="11f28dfa-5845-4cbd-8c15-420132a72c88">
+      <column name="BirthDay" not-null="true" sql-type="DATE" p1:unicode="false" />
+    </property>
+    <property name="Address" type="String" p1:ValidateMaxLength="200" p1:ValidateRequired="True" p1:Guid="40cccbc8-faa9-4471-bb91-e2b29c66448f">
+      <column name="Address" not-null="true" length="200" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <many-to-one name="Contact" class="Contact" p1:AssociationGuid="411a1f8c-73c9-426c-adf2-f36d94fb5a1d" p1:Guid="4277a40e-f47d-4c06-bd29-10a41265fd93">
+      <column name="ContactID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+    </many-to-one>
+  </class>
+</hibernate-mapping>

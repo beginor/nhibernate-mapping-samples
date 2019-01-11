@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ComponentUniqueKeys" namespace="ComponentUniqueKeys" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$ComplexTypes">
+    <component class="KeyType" p1:Guid="fe17ff7a-d763-4efe-a85f-6a74294d258b">
+      <parent name="Parent" p1:generate="false" p1:setter-modifier="private" />
+      <property name="Name" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="05468959-c811-4576-a887-1b2d18d867bd">
+        <column name="Name" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="Phone" type="String" p1:ValidateMaxLength="20" p1:ValidateRequired="True" p1:Guid="cb9bd0ab-f3af-4c90-9b3b-1da64d8a0307">
+        <column name="Phone" not-null="true" length="20" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+    </component>
+  </class>
+  <class name="Factory" table="Factories" p1:Guid="6a3880ba-4ae7-4fd6-840b-530c48658ff5">
+    <id name="FactoryID" type="Int32" p1:ValidateRequired="True" p1:Guid="a96848d1-34c9-45aa-94f1-707a18145a5a">
+      <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <component name="FactoryKey" class="KeyType" p1:ValidateRequired="False" p1:Guid="bb5c1659-5ecb-4ceb-8dd4-ac93c9ad10aa">
+      <property name="Name">
+        <column name="FactoryName" />
+      </property>
+      <property name="Phone">
+        <column name="FactoryPhone" />
+      </property>
+    </component>
+    <set name="Companies" table="CompanyFactories" inverse="true" generic="true" p1:AssociationGuid="b445f94d-a531-4965-97d1-d552fec47a45" p1:Guid="8afadbd4-227a-4610-804c-b9f71c620962">
+      <key property-ref="FactoryKey">
+        <column name="FactoryName" />
+        <column name="FactoryPhone" />
+      </key>
+      <many-to-many class="Company" fetch="join" property-ref="CompanyKey">
+        <column name="CompanyName" />
+        <column name="CompanyPhone" />
+      </many-to-many>
+    </set>
+  </class>
+  <class name="Company" table="Companies" p1:Guid="88690e6c-3918-4fd6-919c-67962a92db6a">
+    <id name="CompanyID" type="Int32" p1:ValidateRequired="True" p1:Guid="3c1ff82e-9f51-49e8-a521-d32c3e0af1c3">
+      <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <component name="CompanyKey" class="KeyType" p1:ValidateRequired="False" p1:Guid="40fdbfbb-b6de-4c8c-b805-0071f2ef6532">
+      <property name="Name">
+        <column name="CompanyName" />
+      </property>
+      <property name="Phone">
+        <column name="CompanyPhone" />
+      </property>
+    </component>
+    <set name="Factories" table="CompanyFactories" generic="true" p1:AssociationGuid="b445f94d-a531-4965-97d1-d552fec47a45" p1:Guid="589095cf-f231-440a-83aa-fd9434cc8f9d">
+      <key property-ref="CompanyKey">
+        <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+        <column name="CompanyPhone" not-null="true" length="20" sql-type="VARCHAR" p1:unicode="false" />
+      </key>
+      <many-to-many class="Factory" fetch="join" property-ref="FactoryKey">
+        <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+        <column name="FactoryPhone" not-null="true" length="20" sql-type="VARCHAR" p1:unicode="false" />
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

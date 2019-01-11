@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ClassWithVersionProperty" namespace="ClassWithVersionProperty" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Department" table="Department">
+    <id name="DEPTNO" type="Int32">
+      <column name="DEPTNO" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <version name="Version" type="Int32">
+      <column name="Version" default="0" not-null="false" sql-type="INTEGER" />
+    </version>
+    <property name="DNAME" type="String">
+      <column name="DNAME" not-null="false" length="14" sql-type="VARCHAR" />
+    </property>
+    <property name="LOC" type="String">
+      <column name="LOC" not-null="false" length="13" sql-type="VARCHAR" />
+    </property>
+  </class>
+</hibernate-mapping>

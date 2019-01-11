@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ComponentUniqueKeys" namespace="ComponentUniqueKeys" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Factory" table="Factories">
+    <id name="FactoryID" type="Int32">
+      <column name="FactoryID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <component name="FactoryKey" class="KeyType">
+      <property name="Name" type="String">
+        <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" />
+      </property>
+      <property name="Phone" type="String">
+        <column name="FactoryPhone" not-null="true" length="20" sql-type="VARCHAR" />
+      </property>
+    </component>
+    <set name="Companies" table="CompanyFactories" inverse="true" generic="true">
+      <key property-ref="FactoryKey">
+        <column name="FactoryName" />
+        <column name="FactoryPhone" />
+      </key>
+      <many-to-many class="Company" fetch="join" property-ref="CompanyKey">
+        <column name="CompanyName" />
+        <column name="CompanyPhone" />
+      </many-to-many>
+    </set>
+  </class>
+  <class name="Company" table="Companies">
+    <id name="CompanyID" type="Int32">
+      <column name="CompanyID" not-null="true" sql-type="INTEGER" />
+      <generator class="identity" />
+    </id>
+    <component name="CompanyKey" class="KeyType">
+      <property name="Name" type="String">
+        <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" />
+      </property>
+      <property name="Phone" type="String">
+        <column name="CompanyPhone" not-null="true" length="20" sql-type="VARCHAR" />
+      </property>
+    </component>
+    <set name="Factories" table="CompanyFactories" generic="true">
+      <key property-ref="CompanyKey">
+        <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" />
+        <column name="CompanyPhone" not-null="true" length="20" sql-type="VARCHAR" />
+      </key>
+      <many-to-many class="Factory" fetch="join" property-ref="FactoryKey">
+        <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" />
+        <column name="FactoryPhone" not-null="true" length="20" sql-type="VARCHAR" />
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

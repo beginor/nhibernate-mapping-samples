@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ComponentID" namespace="ComponentID" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$ComplexTypes">
+    <component class="DepartmentKeyType" p1:Guid="4d26e3bd-8107-450d-803a-05de9a7c36a3">
+      <parent name="Parent" p1:generate="false" p1:setter-modifier="private" />
+      <property name="DepartmentId" type="Int32" p1:ValidateRequired="True" p1:Guid="98f1d75b-afec-48d9-be38-b9ccbc3779e4">
+        <column name="DepartmentId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </property>
+      <property name="PhoneID" type="Int32" p1:ValidateRequired="True" p1:Guid="a26e0b54-eb66-4736-afaf-26d7fb39779a">
+        <column name="PhoneID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      </property>
+    </component>
+  </class>
+  <class name="Employee" table="Employee" p1:Guid="dea9006d-2b38-4f6d-9778-87e99472cac4">
+    <id name="EmployeeId" type="Int32" p1:ValidateRequired="True" p1:Guid="b83b39c8-fce0-4248-9fab-34f0f01d20eb">
+      <column name="EmployeeId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="10" p1:ValidateRequired="False" p1:Guid="e1d5bd67-0cb9-4f23-a518-e56be98ddfff">
+      <column name="Name" not-null="false" length="10" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <many-to-one name="DepartmentPhone" class="DepartmentPhone" p1:AssociationGuid="50fed02a-8632-41f6-993f-1eb2683b80e3" p1:Guid="780f3470-908b-43fd-8a01-5483cae909b2">
+      <column name="DepartmentId" not-null="false" sql-type="INTEGER" p1:unicode="false" />
+      <column name="DepartmentPhoneId" not-null="false" sql-type="INTEGER" p1:unicode="false" />
+    </many-to-one>
+  </class>
+  <class name="DepartmentPhone" table="DepartmentPhone" p1:Guid="b5d6fe25-553e-4338-a082-82b90b59aea9">
+    <composite-id name="DepartmentKey" class="DepartmentKeyType" p1:ValidateRequired="False" p1:Guid="59b97889-a2f2-4462-810e-10f40b4ce07b">
+      <key-property name="DepartmentId">
+        <column name="DepartmentId" />
+      </key-property>
+      <key-property name="PhoneID">
+        <column name="PhoneID" />
+      </key-property>
+    </composite-id>
+    <property name="PhoneNumber" type="String" p1:nullable="true" p1:ValidateMaxLength="20" p1:ValidateRequired="False" p1:Guid="b585b8e4-acf0-4c42-9c3f-3a342692aa82">
+      <column name="PhoneNumber" not-null="false" length="20" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="d931aed2-34b7-4128-b740-361495e46c79">
+      <column name="Name" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Employees" inverse="true" generic="true" p1:AssociationGuid="50fed02a-8632-41f6-993f-1eb2683b80e3" p1:Guid="f1607be8-c737-4564-a280-e0a1c9f6cb6b">
+      <key>
+        <column name="DepartmentId" />
+        <column name="DepartmentPhoneId" />
+      </key>
+      <one-to-many class="Employee" />
+    </set>
+  </class>
+</hibernate-mapping>

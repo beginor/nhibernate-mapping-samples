@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="UniqueKeys" namespace="UniqueKeys" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Factory" table="Factories" p1:Guid="fabf4561-93e4-43fa-ae60-867fc53e520f">
+    <id name="FactoryID" type="Int32" p1:ValidateRequired="True" p1:Guid="58a57992-9acf-483b-a6b3-c47a2647fb2b">
+      <column name="FactoryID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="FactoryName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="e3721188-c412-4f3b-9fac-0dd270842379">
+      <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Companies" table="CompanyFactories" inverse="true" generic="true" p1:AssociationGuid="58011ee1-4765-4048-83f5-1c41185a3aec" p1:Guid="cf1a150f-dde0-4dec-9a59-34661b997c15">
+      <key property-ref="FactoryName">
+        <column name="FactoryName" />
+      </key>
+      <many-to-many class="Company" fetch="join" property-ref="CompanyName">
+        <column name="CompanyName" />
+      </many-to-many>
+    </set>
+  </class>
+  <class name="Company" table="Companies" p1:Guid="4ad79584-28fb-416b-809b-0ca6a4d9711d">
+    <id name="CompanyID" type="Int32" p1:ValidateRequired="True" p1:Guid="4966a5a6-4131-452e-8f82-ee098a04d962">
+      <column name="CompanyID" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="CompanyName" type="String" p1:ValidateMaxLength="15" p1:ValidateRequired="True" p1:Guid="72f14fe3-743d-44d1-81ff-a55addab7e19">
+      <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <set name="Factories" table="CompanyFactories" generic="true" p1:AssociationGuid="58011ee1-4765-4048-83f5-1c41185a3aec" p1:Guid="7968687b-7f01-41fe-9725-90e17ed9a2be">
+      <key property-ref="CompanyName">
+        <column name="CompanyName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+      </key>
+      <many-to-many class="Factory" fetch="join" property-ref="FactoryName">
+        <column name="FactoryName" not-null="true" length="15" sql-type="VARCHAR" p1:unicode="false" />
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

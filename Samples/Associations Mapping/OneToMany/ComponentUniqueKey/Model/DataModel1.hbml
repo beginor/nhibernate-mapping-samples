@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="ComponentUniqueKey" namespace="ComponentUniqueKey" p1:Guid="8d3b5597-3c22-4e32-9cd1-caed4cfc8c5a" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="$ComplexTypes">
+    <component class="DeptKeyType" p1:Guid="9d91ba39-2a17-4ff2-b060-a077d8b90e5a">
+      <parent name="Parent" p1:generate="false" p1:setter-modifier="private" />
+      <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="14" p1:ValidateRequired="False" p1:Guid="3910ee52-488c-4446-93e8-f70a645cf803">
+        <column name="Name" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+      <property name="Phone" type="String" p1:nullable="true" p1:ValidateMaxLength="20" p1:ValidateRequired="False" p1:Guid="6914895f-cf0c-48a9-858e-0f0accb278c1">
+        <column name="Phone" not-null="false" length="20" sql-type="VARCHAR" p1:unicode="false" />
+      </property>
+    </component>
+  </class>
+  <class name="Employee" table="Employee" p1:Guid="3056d97e-bb4d-4e07-80b5-2985773ade70">
+    <id name="EmployeeId" type="Int32" p1:ValidateRequired="True" p1:Guid="a21961f1-fbb2-434c-a652-45e52463effb">
+      <column name="EmployeeId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <property name="Name" type="String" p1:nullable="true" p1:ValidateMaxLength="10" p1:ValidateRequired="False" p1:Guid="7b7330e1-f080-44c8-ad26-55093db9b696">
+      <column name="Name" not-null="false" length="10" sql-type="VARCHAR" p1:unicode="false" />
+    </property>
+    <many-to-one name="Department" class="Department" property-ref="UniqueKey" p1:AssociationGuid="92d8a1d6-8598-42d8-ad03-b15f79f37004" p1:Guid="e6b98078-ce07-4f30-9d3d-b53a7e5dc0d0">
+      <column name="DepartmentName" not-null="false" length="14" sql-type="VARCHAR" p1:unicode="false" />
+      <column name="DepartmentPhone" not-null="false" length="20" sql-type="VARCHAR" p1:unicode="false" />
+    </many-to-one>
+  </class>
+  <class name="Department" table="Department" p1:Guid="820feb28-9c0e-4fa7-99ba-8982e4f3a537">
+    <id name="DepartmentId" type="Int32" p1:ValidateRequired="True" p1:Guid="87b0cde9-3f3c-49e3-ba3a-d152c5d3e3ba">
+      <column name="DepartmentId" not-null="true" sql-type="INTEGER" p1:unicode="false" />
+      <generator class="identity" />
+    </id>
+    <component name="UniqueKey" class="DeptKeyType" p1:ValidateRequired="False" p1:Guid="3e37ac84-3080-4434-8aa5-b94c1d504b1a">
+      <property name="Name">
+        <column name="Name" />
+      </property>
+      <property name="Phone">
+        <column name="Phone" />
+      </property>
+    </component>
+    <set name="Employees" inverse="true" generic="true" p1:AssociationGuid="92d8a1d6-8598-42d8-ad03-b15f79f37004" p1:Guid="07be1c21-6e11-4bc1-b8a7-08a2ba47525d">
+      <key property-ref="UniqueKey">
+        <column name="DepartmentName" />
+        <column name="DepartmentPhone" />
+      </key>
+      <one-to-many class="Employee" />
+    </set>
+  </class>
+</hibernate-mapping>

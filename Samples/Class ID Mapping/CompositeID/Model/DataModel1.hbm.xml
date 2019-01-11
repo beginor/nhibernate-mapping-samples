@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="CompositeID" namespace="CompositeID" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="DepartmentPhone" table="DepartmentPhone">
+    <composite-id>
+      <key-property name="DeptID" type="Int32">
+        <column name="DeptID" not-null="true" sql-type="INTEGER" />
+      </key-property>
+      <key-property name="PhoneID" type="Int32">
+        <column name="PhoneID" not-null="true" sql-type="INTEGER" />
+      </key-property>
+    </composite-id>
+    <property name="PhoneNumber" type="String">
+      <column name="PhoneNumber" not-null="false" length="20" sql-type="VARCHAR" />
+    </property>
+    <property name="DeptName" type="String">
+      <column name="DeptName" not-null="false" length="14" sql-type="VARCHAR" />
+    </property>
+    <property name="Location" type="String">
+      <column name="Location" not-null="false" length="13" sql-type="VARCHAR" />
+    </property>
+  </class>
+</hibernate-mapping>
